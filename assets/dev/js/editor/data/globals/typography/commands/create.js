@@ -18,7 +18,7 @@ export class Create extends CreateBase {
 		if ( groupPrefix ) {
 			Object.entries( controls ).forEach( ( [ key ] ) => {
 				if ( key.includes( groupPrefix ) ) {
-					availableControls[ key.replace( groupPrefix, 'styles_' ) ] = container.settings.get( key );
+					availableControls[ key.replace( groupPrefix, 'typography_' ) ] = container.settings.get( key );
 				}
 			} );
 		}

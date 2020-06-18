@@ -153,7 +153,8 @@
 			text-align: center;
 		}
 
-		.pickr {
+		.pickr,
+		.elementor-control-popover-toggle-toggle-label {
 			@include margin-start(10px);
 		}
 	}

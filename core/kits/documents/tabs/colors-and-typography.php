@@ -43,6 +43,7 @@ class Colors_And_Typography extends Tab_Base {
 			]
 		);
 
+		// Color Value
 		$repeater->add_control(
 			'color',
 			[
@@ -51,6 +52,9 @@ class Colors_And_Typography extends Tab_Base {
 				'dynamic' => [],
 				'selectors' => [
 					'{{WRAPPER}}' => '--e-global-color-{{_id.VALUE}}: {{VALUE}}',
+				],
+				'global' => [
+					'active' => false,
 				],
 			]
 		);
@@ -128,45 +132,48 @@ class Colors_And_Typography extends Tab_Base {
 			[
 				'name' => self::TYPOGRAPHY_GROUP_PREFIX,
 				'label' => '',
+				'global' => [
+					'active' => false,
+				],
 				'fields_options' => [
 					'font_family' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-font-family: "{{VALUE}}"',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-font-family: "{{VALUE}}"',
 						],
 					],
 					'font_size' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-font-size: {{SIZE}}{{UNIT}}',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-font-size: {{SIZE}}{{UNIT}}',
 						],
 					],
 					'font_weight' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-font-weight: {{VALUE}}',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-font-weight: {{VALUE}}',
 						],
 					],
 					'text_transform' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-text-transform: {{VALUE}}',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-text-transform: {{VALUE}}',
 						],
 					],
 					'font_style' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-font-style: {{VALUE}}',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-font-style: {{VALUE}}',
 						],
 					],
 					'text_decoration' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-text-decoration: {{VALUE}}',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-text-decoration: {{VALUE}}',
 						],
 					],
 					'line_height' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-line-height: {{SIZE}}{{UNIT}}',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-line-height: {{SIZE}}{{UNIT}}',
 						],
 					],
 					'letter_spacing' => [
 						'selectors' => [
-							'{{SELECTOR}}' => '--e-global-style-{{external._id.VALUE}}-letter-spacing: {{SIZE}}{{UNIT}}',
+							'{{SELECTOR}}' => '--e-global-typography-{{external._id.VALUE}}-letter-spacing: {{SIZE}}{{UNIT}}',
 						],
 					],
 				],

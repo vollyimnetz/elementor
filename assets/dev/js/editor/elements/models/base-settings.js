@@ -313,9 +313,10 @@ BaseSettingsModel = Backbone.Model.extend( {
 	},
 
 	parseGlobalSettings: function( settings, controls ) {
+		const self = this;
 		settings = elementorCommon.helpers.cloneObject( settings );
 
-		controls = controls || this.controls;
+		controls = controls || self.controls;
 
 		jQuery.each( controls, ( index, control ) => {
 			let valueToParse;
