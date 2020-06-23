@@ -77,6 +77,7 @@ class Manager {
 
 		$settings = array_replace_recursive( $settings, [
 			'kit_id' => $kit->get_main_id(),
+			'site_editor_url' => Plugin::$instance->app->get_settings( 'menu_url' ),
 			'user' => [
 				'can_edit_kit' => $kit->is_editable_by_current_user(),
 			],
