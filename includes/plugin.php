@@ -429,6 +429,11 @@ class Plugin {
 	public $kits_manager;
 
 	/**
+	 * @var Core\App\App
+	 */
+	public $app;
+
+	/**
 	 * @var \Core\Data\Manager
 	 */
 	public $data_manager;
@@ -599,6 +604,8 @@ class Plugin {
 		Tracker::init();
 
 		$this->upgrade = new Core\Upgrade\Manager();
+
+		$this->app = new Core\App\App();
 
 		if ( is_admin() ) {
 			$this->heartbeat = new Heartbeat();

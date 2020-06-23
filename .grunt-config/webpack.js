@@ -8,6 +8,8 @@ const TerserPlugin = require( 'terser-webpack-plugin' );
 
 const aliasList = require('./webpack.alias.js').resolve;
 
+const webpack = require('webpack');
+
 const moduleRules = {
 	rules: [
 		// {
@@ -20,6 +22,14 @@ const moduleRules = {
 		// 	}
 		// },
 		{
+			test: /core[/\\]app.*\.(s)?css$/i,
+			use: [
+				{
+					loader: './loaders/app-imports.js',
+				},
+			],
+		},
+		{
 			test: /\.js$/,
 			exclude: /node_modules/,
 			use: [
@@ -29,7 +39,9 @@ const moduleRules = {
 						presets: [ '@wordpress/default' ],
 						plugins: [
 							[ '@wordpress/babel-plugin-import-jsx-pragma' ],
-							[ 'transform-react-jsx' ],
+							[ '@babel/plugin-transform-react-jsx', {
+								'pragmaFrag': 'React.Fragment',
+							} ],
 							[ '@babel/plugin-proposal-class-properties' ],
 							[ '@babel/plugin-transform-runtime' ],
 							[ '@babel/plugin-transform-modules-commonjs' ],
@@ -53,6 +65,9 @@ const entry = {
 	'common': path.resolve( __dirname, '../core/common/assets/js/common.js' ),
 	'gutenberg': path.resolve( __dirname, '../assets/dev/js/admin/gutenberg.js' ),
 	'new-template': path.resolve( __dirname, '../assets/dev/js/admin/new-template/new-template.js' ),
+	'app': path.resolve( __dirname, '../core/app/assets/js/index.js' ),
+	'app-loader': path.resolve( __dirname, '../core/app/assets/js/app-loader' ),
+	'app-packages': path.resolve( __dirname, '../core/app/assets/js/app-packages' ),
 	'beta-tester': path.resolve( __dirname, '../assets/dev/js/admin/beta-tester/beta-tester.js' ),
 	'frontend': path.resolve( __dirname, '../assets/dev/js/frontend/frontend.js' ),
 	'common-modules': path.resolve( __dirname, '../core/common/assets/js/modules' ),
@@ -72,10 +87,24 @@ const webpackConfig = {
 		filename: '[name].js',
 		devtoolModuleFilenameTemplate: '../[resource]'
 	},
+	plugins: [
+		new webpack.ProvidePlugin( {
+			React: 'react',
+			PropTypes: 'prop-types',
+			__: ['@wordpress/i18n', '__'],
+		} )
+	],
 	module: moduleRules,
 	resolve: aliasList,
 	entry: entry,
 	watch: true,
+	externals: {
+		'@wordpress/i18n': 'wp.i18n',
+		react: 'React',
+		'@elementor/app-ui': 'elementorAppPackages.appUi',
+		'@elementor/site-editor': 'elementorAppPackages.siteEditor',
+		'@elementor/router': 'elementorAppPackages.router',
+	},
 };
 
 const webpackProductionConfig = {

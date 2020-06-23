@@ -1,0 +1,69 @@
+// this import should be to a @package
+@import "../../../styles/common";
+
+$menu-item-font-size: $eps-font-size-caption;
+$menu-item-line-height: $eps-line-height-sm;
+$menu-item-link-spacing: spacing(12);
+$menu-item-icon-size: spacing(16);
+$menu-item-padding-y: spacing(8);
+$menu-item-padding-x: spacing(30);
+$menu-item-height: spacing(44);
+$menu-item-pointer-width: spacing(5);
+$menu-item-pointer-color: theme-colors(link-color);
+
+$menu-item-color: tints(600);
+$menu-item-color-hover: tints(700);
+$menu-item-background-color-active: theme-colors(light);
+
+:root {
+	--menu-item-color: #{$menu-item-color};
+	--menu-item-color-hover: #{$menu-item-color-hover};
+	--menu-item-background-color-active: #{$menu-item-background-color-active};
+}
+
+$menu-item-dark-color: dark-tints(200);
+$menu-item-dark-color-hover: dark-tints(100);
+$menu-item-dark-background-color-active: dark-tints(600);
+
+.dark {
+	--menu-item-color: #{$menu-item-dark-color};
+	--menu-item-color-hover: #{$menu-item-dark-color-hover};
+	--menu-item-background-color-active: #{$menu-item-dark-background-color-active};
+}
+
+.e-app-menu-item {
+	padding: $menu-item-padding-y $menu-item-padding-x;
+	min-height: $menu-item-height;
+	color: var(--menu-item-color);
+	font-size: $menu-item-font-size;
+	line-height: $menu-item-line-height;
+	display: flex;
+	align-items: center;
+	position: relative;
+	transition: $eps-transition-duration;
+
+	&::before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: var(--menu-item-pointer-width);
+		background-color: $menu-item-pointer-color;
+	}
+
+	&:hover, &--active {
+		--menu-item-color: var(--menu-item-color-hover);
+	}
+
+	.icon {
+		font-size: $menu-item-icon-size;
+		margin-inline-end: $menu-item-link-spacing;
+	}
+
+	&--active {
+		--menu-item-pointer-width: #{$menu-item-pointer-width};
+		background-color: var(--menu-item-background-color-active);
+	}
+}
