@@ -185,7 +185,7 @@ class Test_Canary_Deployment extends Elementor_Test_Base {
 		$this->assertEmpty( $filtered_transient->response, 'Equal' );
 
 		// Lower than.
-		$condition['version'] = $this->decrease_version( static::CURRENT_VERSION );
+		$condition['version'] = '0.0.1';
 		$filtered_transient = $this->check_condition( $condition );
 
 		$this->assertNotEmpty( $filtered_transient->response, 'Lower than' );
