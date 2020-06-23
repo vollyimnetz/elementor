@@ -15,16 +15,32 @@ export default class ControlPopoverStarterView extends ControlChooseView {
 	events() {
 		return _.extend( ControlChooseView.prototype.events.apply( this, arguments ), {
 			'click @ui.popoverToggle': 'onPopoverToggleClick',
+			'click @ui.resetInput': 'onResetInputClick',
 		} );
 	}
 
-	onPopoverToggleClick() {
+	onResetInputClick() {
 		const globalData = this.model.get( 'global' );
 
-		if ( 'typography' === this.model.get( 'groupType' ) && this.ui.popoverToggle.is( ':checked' ) && globalData?.active ) {
-			this.triggerMethod( 'unsetGlobalValue' );
+		if ( globalData?.active ) {
+			this.triggerMethod( 'value:type:change' );
+		}
+	}
+
+	onInputChange( event ) {
+		if ( event.currentTarget !== this.ui.popoverToggle[ 0 ] ) {
+			return;
 		}
 
+		// If the control has a global value, unset the global
+		if ( this.getGlobalKey() ) {
+			this.triggerMethod( 'unsetGlobalValue' );
+		} else if ( this.isGlobalActive() ) {
+			this.triggerMethod( 'value:type:change' );
+		}
+	}
+
+	onPopoverToggleClick() {
 		this.$el.next( '.elementor-controls-popover' ).toggle();
 	}
 
@@ -74,7 +90,7 @@ export default class ControlPopoverStarterView extends ControlChooseView {
 			}
 
 			if ( 'font_family' === property ) {
-				this.enqueueFont( value );
+				elementor.helpers.enqueueFont( value, 'editor' );
 			}
 
 			if ( 'font_size' === property ) {

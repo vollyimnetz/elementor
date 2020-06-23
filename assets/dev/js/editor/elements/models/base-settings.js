@@ -325,7 +325,7 @@ BaseSettingsModel = Backbone.Model.extend( {
 				valueToParse = settings[ control.name ];
 
 				valueToParse.forEach( ( value, key ) => {
-					valueToParse[ key ] = this.parseGlobalSettings( value, control.fields );
+					valueToParse[ key ] = self.parseGlobalSettings( value, control.fields );
 				} );
 
 				return;

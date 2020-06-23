@@ -47,8 +47,12 @@ export default class extends elementorModules.editor.utils.Module {
 	}
 
 	addGlobalsBehavior( behaviors, view ) {
-		const globalConfig = view.options.model.get( 'global' ),
-			isGlobalActive = globalConfig?.active;
+		// The view can be a UI control which does not have this method
+		if ( ! view.isGlobalActive ) {
+			return;
+		}
+
+		const isGlobalActive = view.isGlobalActive();
 
 		if ( 'color' === view.options.model.get( 'type' ) && isGlobalActive ) {
 			behaviors.globals = {
@@ -56,7 +60,7 @@ export default class extends elementorModules.editor.utils.Module {
 				popoverTitle: elementor.translate( 'global_colors_title' ),
 				manageButtonText: elementor.translate( 'manage_global_colors' ),
 				tooltipText: elementor.translate( 'global_colors_info' ),
-				newGlobalConfirmTitle: elementor.translate( 'create_global_style' ),
+				newGlobalConfirmTitle: elementor.translate( 'create_global_color' ),
 			};
 		}
 
@@ -66,7 +70,7 @@ export default class extends elementorModules.editor.utils.Module {
 				popoverTitle: elementor.translate( 'global_text_styles_title' ),
 				manageButtonText: elementor.translate( 'manage_global_typography' ),
 				tooltipText: elementor.translate( 'global_typography_info' ),
-				newGlobalConfirmTitle: elementor.translate( 'create_global_color' ),
+				newGlobalConfirmTitle: elementor.translate( 'create_global_style' ),
 			};
 		}
 
