@@ -543,6 +543,10 @@ abstract class Group_Control_Base implements Group_Control_Interface {
 
 		$settings = $this->get_args();
 
+		if ( isset( $settings['popover'] ) ) {
+			$popover_options['settings'] = array_replace_recursive( $popover_options['settings'], $settings['popover']['settings'] );
+		}
+
 		if ( isset( $settings['label'] ) ) {
 			$label = $settings['label'];
 		} else {
@@ -570,6 +574,8 @@ abstract class Group_Control_Base implements Group_Control_Interface {
 		if ( isset( $this->args['fields_options'][ $starter_name ] ) ) {
 			$control_params = array_merge( $control_params, $this->args['fields_options'][ $starter_name ] );
 		}
+
+		$control_params['groupPrefix'] = $this->get_controls_prefix();
 
 		$element->add_control( $this->get_controls_prefix() . $starter_name, $control_params );
 

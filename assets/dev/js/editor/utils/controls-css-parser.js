@@ -62,7 +62,7 @@ ControlsCSSParser = elementorModules.ViewModule.extend( {
 
 	addControlStyleRules: function( control, values, controls, placeholders, replacements ) {
 		const context = this.getSettings( 'context' ),
-			globals = context.model.get( '__globals__' );
+			globals = context.model.get( 'settings' ).get( '__globals__' );
 
 		let globalValue;
 
@@ -82,7 +82,11 @@ ControlsCSSParser = elementorModules.ViewModule.extend( {
 			value = this.getStyleControlValue( control, values );
 
 			if ( undefined === value ) {
-				return;
+				if ( ! control.global?.default ) {
+					return;
+				}
+
+				globalValue = control.global.default;
 			}
 		}
 
