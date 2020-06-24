@@ -2,6 +2,7 @@
 namespace Elementor\Core\Kits;
 
 use Elementor\Core\Kits\Controls\Repeater;
+use Elementor\Core\Kits\Documents\Tabs\Colors_And_Typography;
 use Elementor\Plugin;
 use Elementor\Core\Files\CSS\Post as Post_CSS;
 use Elementor\Core\Files\CSS\Post_Preview as Post_Preview;
@@ -77,7 +78,10 @@ class Manager {
 
 		$settings = array_replace_recursive( $settings, [
 			'kit_id' => $kit->get_main_id(),
-			'site_editor_url' => Plugin::$instance->app->get_settings( 'menu_url' ),
+			'kit_config' => [
+				'typography_prefix' => Colors_And_Typography::TYPOGRAPHY_GROUP_PREFIX,
+			],
+            'site_editor_url' => Plugin::$instance->app->get_settings( 'menu_url' ),
 			'user' => [
 				'can_edit_kit' => $kit->is_editable_by_current_user(),
 			],
